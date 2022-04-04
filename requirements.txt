@@ -1,0 +1,6 @@
+aiogram==2.19
+logging==0.4.9.6
+requests==2.26.0
+aioschedule==0.5.2
+asyncio==3.4.3
+time
