@@ -110,7 +110,7 @@ async def current_contests(callback_query: types.CallbackQuery):
         text += f'*Название:* {el[1]}\n'
         duration_time = int(el[2] / 60)
         duration_time = str(duration_time // 60) + ' ч. ' + str(duration_time % 60) + ' мин.' if duration_time % 60 != 0 else str(duration_time // 60) + ' ч.'
-        text += f'*Пробложительность:* ' + duration_time + '\n'
+        text += f'*Продолжительность:* ' + duration_time + '\n'
         if el[3] == 'BEFORE':
             status = 'не начался'
         elif el[3] == 'FINISHED':
@@ -139,7 +139,7 @@ async def current_contests(callback_query: types.CallbackQuery):
         text += f'*Название:* {el[1]}\n'
         duration_time = int(el[2] / 60)
         duration_time = str(duration_time // 60) + ' ч. ' + str(duration_time % 60) + ' мин.' if duration_time % 60 != 0 else str(duration_time // 60) + ' ч.'
-        text += f'*Пробложительность:* ' + duration_time + '\n'
+        text += f'*Продолжительность:* ' + duration_time + '\n'
         if el[3] == 'BEFORE':
             status = 'не начался'
         elif el[3] == 'FINISHED':
@@ -204,7 +204,6 @@ async def check_for_nearest_contests():
 async def news():
     aioschedule.every(5).minutes.do(check_for_nearest_contests)
     aioschedule.every(5).minutes.do(check_for_new_posts)
-    # добавить функцию поиска новых постов
     while True:
         await aioschedule.run_pending()
         await asyncio.sleep(1)
@@ -234,7 +233,7 @@ async def post_nearest_contest(msg, callback_query=types.CallbackQuery):
 async def post_new_blog(msg, callback_query=types.CallbackQuery):
     await bot.send_message(USER_ID, msg, reply_markup=btn.menu, parse_mode='HTML', disable_web_page_preview=True)
     
-# run long-polling
+# запуск "лонг-поллинг" (апдейты пропускаются)
 if __name__ == '__main__':
     while True:
         try:
